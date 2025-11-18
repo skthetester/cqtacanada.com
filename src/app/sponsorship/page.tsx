@@ -1,7 +1,15 @@
+'use client';
+
 import Hero from "../../components/Hero";
 import Link from "next/link";
+import { generateSponsorshipBrochure } from "../../../lib/pdf-generator";
 
 export default function Sponsorship() {
+  const handleDownloadBrochure = () => {
+    const pdf = generateSponsorshipBrochure();
+    pdf.save('cqta-sponsorship-opportunities.pdf');
+  };
+
   const sponsorshipLevels = [
     {
       level: "Executive",
@@ -182,12 +190,20 @@ export default function Sponsorship() {
               Showcase your commitment to quality engineering, connect directly with industry professionals, 
               and gain exceptional recognition through a trusted national platform.
             </p>
-            <Link 
-              href="/contact" 
-              className="inline-block bg-white text-canada-red px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              Become a Sponsor Today
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link 
+                href="/contact" 
+                className="inline-block bg-white text-canada-red px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              >
+                Become a Sponsor Today
+              </Link>
+              <button 
+                onClick={handleDownloadBrochure}
+                className="inline-block bg-gray-800 !text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-700 transition-colors shadow-lg"
+              >
+                Download Brochure
+              </button>
+            </div>
           </div>
         </div>
       </div>
