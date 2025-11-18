@@ -60,6 +60,17 @@ button {
   padding-right: 1rem;
 }
 
+/* Brand text next to logo */
+.brand-text {
+  color: var(--rogers-red);
+  /* unified size and weight for both lines */
+  font-weight: 800;
+  line-height: 1.02;
+  font-size: 1.1rem;
+  letter-spacing: -0.2px;
+}
+.brand-text .line-small { font-weight: 800; font-size: 1.1rem; }
+
 /* Simple accessible focus style */
 :focus {
   outline: 3px solid rgba(220,38,38,0.18);
@@ -81,13 +92,92 @@ button {
   align-items: center;
 }
 
-/* Rogers-like top navigation */
+/* Top navigation: white background, black text; red animated underline on hover */
 .top-nav {
-  background: var(--rogers-red);
-  color: var(--canada-white);
+  background: var(--canada-white);
+  /* Use a fixed dark text color on the white header so it stays readable
+     even when the OS prefers dark mode (which flips --foreground). */
+  --top-nav-text: #111827;
 }
-.top-nav a { color: var(--canada-white); }
+.top-nav a { color: var(--top-nav-text); }
+.top-nav .nav-link { color: var(--top-nav-text); }
+
+/* (no header-specific site-container override) */
+
+/* Buttons are globally heavier; ensure header nav buttons are normal weight by default
+   and only become bold on hover/focus to match link behavior. This prevents the
+   'Events' button from appearing bold by default. */
+.top-nav button,
+.top-nav .nav-link {
+  font-weight: 400;
+}
+.top-nav .nav-link:hover,
+.top-nav .nav-link:focus {
+  font-weight: 600;
+}
 .top-nav a:hover { opacity: 0.95; }
+
+/* Animated red underline for navigation links */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--foreground);
+  padding: 0 6px;
+  height: 40px;
+}
+.nav-text {
+  position: relative;
+  display: inline-block;
+}
+.nav-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: var(--canada-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 2;
+}
+.nav-link:hover .nav-text::after,
+.nav-link:focus .nav-text::after,
+.nav-text:focus::after,
+.nav-text:active::after {
+  transform: scaleX(1);
+}
+
+/* improve touch behavior for nav links on mobile */
+.nav-link { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.nav-link:active::after { transform: scaleX(1); }
+
+/* Ensure submenu links inside dropdown also use the same style but as block-level */
+.nav-link.block {
+  display: block;
+}
+
+/* Remove any hover/focus background or outline on the logo link/image */
+.top-nav > .site-container a img,
+.top-nav > .site-container a {
+  background: transparent !important;
+}
+.top-nav > .site-container a:hover,
+.top-nav > .site-container a:focus {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove underline override for CTA so it can use the same nav style if needed */
+/* (Get in Touch will now use `nav-link` to match other menu items) */
+
+/* Ensure header links don't get a heavy focus outline */
+.top-nav a:focus { outline: none; box-shadow: none; }
 
 /* Hero overlay variants */
 .hero-overlay-red { background: linear-gradient(180deg, rgba(204,0,0,0.28), rgba(0,0,0,0.35)); }
@@ -102,7 +192,8 @@ button {
 .section-alt-2 h2 { color: var(--canada-grey); }
 
 /* CTA variations */
-.btn-rogers { background: var(--rogers-red); color: var(--canada-white); }
+.btn-rogers { background: var(--rogers-red); color: var(--canada-white); display: inline-flex; align-items: center; justify-content: center; height: 40px; padding-left: 10px; padding-right: 10px; }
+.btn-rogers:hover { filter: brightness(0.95); }
 .btn-ghost { background: transparent; color: var(--rogers-red); border: 1px solid rgba(204,0,0,0.12); }
 
 .hero-overlay {
