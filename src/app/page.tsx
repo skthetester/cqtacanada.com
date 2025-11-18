@@ -1,16 +1,15 @@
-import Hero from '../components/Hero';
 import Carousel from '../components/Carousel';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      <Hero title="Welcome to CQTA Canada" subtitle="Advancing software quality engineering across Canada." image="/hero-maple.jpg" />
+      <Carousel />
 
       {/* Mission Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Our Mission</h2>
-          <p className="text-lg text-gray-600 text-center max-w-4xl mx-auto">
+      <section className="py-16 section-alt-1">
+        <div className="site-container">
+          <h2 className="text-3xl font-bold text-center mb-8">Our Mission</h2>
+          <p className="text-lg text-white text-center max-w-4xl mx-auto">
             CQTA Canada is dedicated to fostering a vibrant community of software quality assurance professionals.
             We provide resources, networking opportunities, and advocacy to elevate the standards of software testing
             and quality engineering in Canada. Join us in building a future where quality is paramount in software development.
@@ -19,9 +18,9 @@ export default function Home() {
       </section>
 
       {/* Previous Events Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Previous Events</h2>
+      <section className="py-16 section-alt-2">
+        <div className="site-container">
+          <h2 className="text-3xl font-bold text-center mb-12">Previous Events</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold mb-2">CQTA Annual Conference 2024</h3>
