@@ -1,9 +1,29 @@
+import { Poppins } from 'next/font/google';
 import Carousel from '../components/Carousel';
+
+const poppins = Poppins({ variable: '--font-poppins', subsets: ['latin'], weight: ['300','400','600','700'] });
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <Carousel />
+
+      {/* Font demos */}
+      <section className="py-16">
+        <div className="site-container">
+          <h2 className="text-3xl font-bold text-center mb-8">Font combinations — samples</h2>
+
+          <div className="grid gap-8">
+            {/* 1: Inter (body) + Poppins (headings) */}
+            <div className="p-6 rounded-lg border bg-white shadow-sm">
+              <div className={`${poppins.variable} font-sans`}>
+                <h3 className="text-2xl font-extrabold mb-2" style={{ fontFamily: 'Poppins, var(--font-inter)' }}>Inter (body) + Poppins (headings)</h3>
+                <p className="text-base text-gray-700">This sample uses the site default body font (Inter) with Poppins applied to headings for a modern, polished look. The headline above is rendered using Poppins while the paragraph below falls back to Inter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Mission Section */}
       <section className="py-16 section-alt-1">

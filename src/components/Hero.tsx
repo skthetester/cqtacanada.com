@@ -27,7 +27,7 @@ export default function Hero({
     <section className="relative w-full hero-bg" style={style}>
       <div className={`absolute inset-0 ${overlayClass}`} />
       <div className="relative z-10 py-28">
-        <div className="site-container text-center text-white">
+        <div className="site-container text-center text-white px-4">
           <h1 className="hero-title mb-4">{title}</h1>
           {subtitle && <p className="hero-sub max-w-3xl mx-auto mb-8">{subtitle}</p>}
         </div>
