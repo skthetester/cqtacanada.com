@@ -2,23 +2,23 @@
 // EventCard for rendering event details in the carousel
 function EventCard({ event }: { event: typeof events[0] }) {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-4 bg-neutral-900 rounded-xl p-4 md:p-6 w-full max-w-2xl shadow-lg min-h-0">
-      <img src={event.image} alt={event.title} className="w-full md:w-1/3 max-h-40 rounded-lg object-cover" />
-      <div className="flex-1 flex flex-col gap-2 text-white">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="bg-white text-red-600 rounded-lg px-3 py-1 text-center font-bold text-base">
+    <div className="flex flex-col md:flex-row items-center gap-2 bg-neutral-900 rounded-xl p-2 md:p-3 w-full max-w-2xl shadow-lg min-h-0">
+      <img src={event.image} alt={event.title} className="w-full md:w-1/3 max-h-20 rounded-lg object-cover" />
+      <div className="flex-1 flex flex-col gap-1 text-white">
+        <div className="flex items-center gap-1 mb-1">
+          <div className="bg-white text-red-600 rounded-lg px-2 py-1 text-center font-bold text-sm">
             <div className="text-xs">{event.dateShortMonth}</div>
-            <div className="text-xl leading-none">{event.dateDay}</div>
+            <div className="text-lg leading-none">{event.dateDay}</div>
           </div>
-          <h3 className="text-xl md:text-2xl font-semibold leading-tight">{event.title}</h3>
+          <h3 className="text-lg md:text-xl font-semibold leading-tight">{event.title}</h3>
         </div>
-        <div className="flex items-center gap-1 text-base">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-red-600">
+        <div className="flex items-center gap-1 text-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-red-600">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6.75a6 6 0 11-7.5 0m7.5 0A6 6 0 006.75 12v.75a3.75 3.75 0 003.75 3.75h3a3.75 3.75 0 003.75-3.75V12a6 6 0 00-7.5-5.25" />
           </svg>
           <span>{event.location}</span>
         </div>
-        <div className="text-base">
+        <div className="text-sm">
           <span className="font-medium">Time:</span> {event.time}
         </div>
       </div>
@@ -218,14 +218,7 @@ export default function Home() {
               autoPlay={false}
               showJoinButton={false}
             />
-            {/* Overlay the custom event card on top of the carousel image */}
-            <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center justify-center pointer-events-none">
-              <EventCard event={
-                [...events]
-                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                  .slice(0, 6)[0]
-              } />
-            </div>
+            {/* Removed overlay EventCard to prevent sticky black section */}
           </div>
         </div>
       </motion.section>
