@@ -19,31 +19,78 @@ export default function Home() {
 
       {/* Font demos */}
       <section className="py-16">
-        <div className="site-container">
-          <h2 className="text-3xl font-bold text-center mb-8">Font combinations — samples</h2>
-
-          <div className="grid gap-8">
-            {/* 1: Inter (body) + Poppins (headings) */}
-            <div className="p-6 rounded-lg border bg-white shadow-sm">
-              <div className={`${poppins.variable} font-sans`}>
-                <h3 className="text-2xl font-extrabold mb-2" style={{ fontFamily: 'Poppins, var(--font-inter)' }}>Inter (body) + Poppins (headings)</h3>
-                <p className="text-base text-gray-700">This sample uses the site default body font (Inter) with Poppins applied to headings for a modern, polished look. The headline above is rendered using Poppins while the paragraph below falls back to Inter.</p>
+          {/* About Us Section */}
+          <section className="py-16 bg-gray-50">
+            <div className="site-container max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-6">About us</h2>
+              <p className="text-lg text-gray-800 text-center">
+                The Canadian Quality and Testing Association (CQTA) is a non-profit organization which runs a national-level community forum dedicated to Quality Engineering (QE) in Canada. QE professionals represent around 30% of the IT workforce in the country. Our mission is to foster collaboration among diverse professionals in this field through events, mentorship programs, networking opportunities, and more. With over 1000+ members, including QE leaders from various parts of Canada, we are one of the fastest-growing social media groups in the QE space in Canada. Our goal is to make Canada the global hub for testing!
+              </p>
+              <div className="flex justify-center mt-8">
+                <a
+                  href="/about"
+                  className="carousel-btn"
+                >
+                  Learn More
+                </a>
               </div>
             </div>
+          </section>
+
+      {/* Mission Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="site-container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="border border-gray-300 rounded-xl p-8 flex flex-row items-center bg-transparent">
+            <div className="mr-6 flex items-center justify-center w-20 h-20">
+              {/* Group Icon (Members) */}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 96 96" width="192" height="192">
+                <g stroke="#cc0000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="48" cy="40" r="12"/>
+                  <path d="M24 80v-8c0-8.837 14.327-16 32-16s32 7.163 32 16v8"/>
+                  <circle cx="24" cy="56" r="8"/>
+                  <circle cx="72" cy="56" r="8"/>
+                  <path d="M16 80v-4c0-4.418 7.163-8 16-8m48 12v-4c0-4.418-7.163-8-16-8"/>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <div className="font-bold text-lg text-white">1000+ Members and Growing</div>
+            </div>
+          </div>
+          <div className="border border-gray-300 rounded-xl p-8 flex flex-row items-center bg-transparent">
+            <div className="mr-6 flex items-center justify-center w-20 h-20">
+              {/* Circuit/Chip Icon (Bolder) */}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 96 96" width="192" height="192">
+                <g stroke="#cc0000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="24" y="40" width="48" height="32" rx="8"/>
+                  <path d="M48 40V24m0 48v-8m-16-8H16m64 0H64m-8-8V16m8 8V16m-8 64v-8m8 8v-8"/>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <div className="font-bold text-lg text-white">30% of IT Workforce in QE</div>
+            </div>
+          </div>
+          <div className="border border-gray-300 rounded-xl p-8 flex flex-row items-center bg-transparent">
+            <div className="mr-6 flex items-center justify-center w-20 h-20">
+              {/* Calendar/Star Icon for Events & Resources */}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 96 96" width="192" height="192">
+                <g stroke="#cc0000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none">
+                  <rect x="20" y="28" width="56" height="44" rx="8"/>
+                  <path d="M32 28V20m32 8V20"/>
+                  <rect x="20" y="40" width="56" height="32" rx="8"/>
+                  <path d="M48 54l4.24 8.48 9.36 1.36-6.8 6.64 1.6 9.36L48 74.24l-8.4 4.6 1.6-9.36-6.8-6.64 9.36-1.36L48 54z" fill="#cc0000" stroke="#cc0000"/>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <div className="font-bold text-lg text-white">Industry-leading Events & Resources</div>
+            </div>
+          </div>
           </div>
         </div>
       </section>
-
-      {/* Mission Section */}
-      <section className="py-16 section-alt-1">
-        <div className="site-container">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Mission</h2>
-          <p className="text-lg text-white text-center max-w-4xl mx-auto">
-            CQTA is dedicated to fostering a vibrant community of software quality assurance professionals.
-            We provide resources, networking opportunities, and advocacy to elevate the standards of software testing
-            and quality engineering in Canada. Join us in building a future where quality is paramount in software development.
-          </p>
-        </div>
       </section>
 
       {/* Previous Events Section */}

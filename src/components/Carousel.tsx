@@ -74,12 +74,6 @@ export default function Carousel({ slides, autoPlay = true, autoPlayInterval = 5
                   >
                     Join the community
                   </a>
-                  <a
-                    href="/about"
-                    className="carousel-btn"
-                  >
-                    Learn more
-                  </a>
                 </div>
               </div>
             </div>
