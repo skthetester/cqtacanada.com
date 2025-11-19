@@ -12,9 +12,6 @@ export default function PrivacyPolicy() {
       <section className="py-16">
         <div className="site-container max-w-4xl">
           <div className="prose prose-lg max-w-none">
-            <p className="text-gray-600 mb-6">
-              <strong>Last Updated:</strong> November 18, 2025
-            </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">1. Information We Collect</h2>
             <p className="text-gray-700 mb-4">
@@ -97,13 +94,16 @@ export default function PrivacyPolicy() {
                 <strong>Canadian Quality and Testing Association</strong>
               </p>
               <p className="text-gray-700 mb-2">
-                Email: <a href="mailto:privacy@cqtacanada.com" className="text-canada-red hover:underline">privacy@cqtacanada.com</a>
+                Email: <a href="mailto:contact@cqtacanada.com" className="text-canada-red hover:underline">contact@cqtacanada.com</a>
               </p>
               <p className="text-gray-700">
                 Or visit our <a href="/contact" className="text-canada-red hover:underline">Contact page</a>
               </p>
             </div>
           </div>
+          <p className="text-gray-600 mt-12 text-right">
+            <strong>Last Updated:</strong> August 1, 2025
+          </p>
         </div>
       </section>
     </div>

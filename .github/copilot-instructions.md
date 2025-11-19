@@ -7,6 +7,7 @@
 	Use only standard colors: red, white, and grey throughout the site
 	All buttons should use the same style as the .carousel-btn class in globals.css for visual consistency
 	Maintain consistent vertical spacing between all homepage sections for a balanced layout
+	All pages should use Framer Motion for scroll-in section animations for a modern, interactive experience.
 
 - [x] Scaffold the Project
 	Project already scaffolded
