@@ -6,6 +6,7 @@
 	PDF font matching to website fonts (Inter for body, Poppins for headers)
 	Use only standard colors: red, white, and grey throughout the site
 	All buttons should use the same style as the .carousel-btn class in globals.css for visual consistency
+	Maintain consistent vertical spacing between all homepage sections for a balanced layout
 
 - [x] Scaffold the Project
 	Project already scaffolded

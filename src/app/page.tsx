@@ -17,7 +17,7 @@ export default function Home() {
         }]}
       />
 
-      {/* Font demos */}
+      {/* Main Content Sections */}
       <section className="py-16">
           {/* About Us Section */}
           <section className="py-16 bg-gray-50">
@@ -37,7 +37,7 @@ export default function Home() {
             </div>
           </section>
 
-      {/* Mission Section */}
+      {/* Highlights Section */}
       <section className="py-16 bg-gray-900">
         <div className="site-container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

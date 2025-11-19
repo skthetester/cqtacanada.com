@@ -25,7 +25,7 @@ const jetMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CQTA - Software Quality Engineering Community",
+  title: "CQTA - Advancing Quality Engineering & Testing in Canada",
   description: "Advancing software quality engineering and supporting testing professionals in Canada.",
 };
 
