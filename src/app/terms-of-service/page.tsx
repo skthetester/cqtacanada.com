@@ -6,7 +6,7 @@ export default function TermsOfService() {
       <Hero 
         title="Terms of Service" 
         subtitle="Please read these terms carefully before using our services"
-        overlay="white"
+        overlay="black"
       />
 
       <section className="py-16">

@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
       <Hero 
         title="Privacy Policy" 
         subtitle="Your privacy is important to us"
-        overlay="white"
+        overlay="black"
       />
 
       <section className="py-16">

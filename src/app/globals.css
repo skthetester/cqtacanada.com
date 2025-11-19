@@ -204,9 +204,10 @@ button {
 }
 
 .hero-title {
-  font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+  font-size: clamp(3rem, 6vw, 6rem);
   line-height: 1.05;
   font-weight: 700;
+  color: white;
 }
 
 .hero-sub {
