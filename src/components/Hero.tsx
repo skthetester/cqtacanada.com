@@ -26,8 +26,8 @@ export default function Hero({
   return (
     <section className="relative w-full hero-bg min-h-screen" style={style}>
       <div className={`absolute inset-0 ${overlayClass}`} />
-      <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="site-container text-center text-white px-4">
+      <div className="relative z-10 flex items-center justify-center min-h-screen w-screen">
+        <div className="flex flex-col items-center justify-center w-screen px-4 text-center text-white">
           <h1 className="hero-title mb-4">{title}</h1>
           {subtitle && <p className="hero-sub max-w-3xl mx-auto mb-8">{subtitle}</p>}
         </div>
