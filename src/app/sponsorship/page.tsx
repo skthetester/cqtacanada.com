@@ -3,11 +3,26 @@
 import Hero from "../../components/Hero";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { generateSponsorshipBrochure } from "../../../lib/pdf-generator";
+import { generateSponsorshipBrochure, SponsorshipBrochureContent } from "../../../lib/pdf-generator";
 
 export default function Sponsorship() {
   const handleDownloadBrochure = () => {
-    const pdf = generateSponsorshipBrochure();
+    const brochureContent: SponsorshipBrochureContent = {
+      title: "CQTA Sponsorship Opportunities",
+      subtitle: "Partner with CQTA to elevate your brand and contribute to the advancement of quality engineering across the nation.",
+      intro: "Our sponsorship packages provide exceptional opportunities for brand exposure, industry leadership, and engagement with Canada's premier quality engineering community.",
+      tiers: sponsorshipLevels,
+      ctaTitle: "Join CQTA as a Sponsor",
+      ctaText: "Showcase your commitment to quality engineering, connect directly with industry professionals, and gain exceptional recognition through a trusted national platform.",
+      website: "cqtacanada.com",
+      email: "contact@cqtacanada.com",
+      contactLine: "Contact us today to discuss your sponsorship package!",
+      contactLinks: [
+        { label: "cqtacanada.com", url: "https://cqtacanada.com" },
+        { label: "contact@cqtacanada.com", url: "mailto:contact@cqtacanada.com" }
+      ]
+    };
+    const pdf = generateSponsorshipBrochure(brochureContent);
     pdf.save('cqta-sponsorship-opportunities.pdf');
   };
 
@@ -31,12 +46,12 @@ export default function Sponsorship() {
       highlight: false,
       popular: true,
       features: [
+        "Participation as a panelist in discussions",
         "5 social media shoutouts (2 post-event)",
         "Recognition twice during the event",
         "Table booth at event venue",
-        "Post-event attendee contact list (opt-in)",
         "6 complimentary event passes",
-        "5-minute speaking slot in keynote/panel",
+        "Post-event attendee contact list (opt-in)",
         "Branded swag in attendee kits"
       ],
       description: "Premium sponsorship with extensive brand exposure and engagement opportunities"

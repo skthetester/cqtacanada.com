@@ -10,7 +10,32 @@ interface SponsorshipTier {
   contactButton?: boolean;
 }
 
-export function generateSponsorshipBrochure(): jsPDF {
+
+export interface SponsorshipBrochureContent {
+  title: string;
+  subtitle?: string;
+  intro: string;
+  tiers: SponsorshipTier[];
+  ctaTitle: string;
+  ctaText: string;
+  website: string;
+  email: string;
+  contactLine: string;
+  contactLinks: { label: string; url: string }[];
+}
+
+export function generateSponsorshipBrochure({
+  title,
+  subtitle,
+  intro,
+  tiers,
+  ctaTitle,
+  ctaText,
+  website,
+  email,
+  contactLine,
+  contactLinks
+}: SponsorshipBrochureContent): jsPDF {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -20,11 +45,12 @@ export function generateSponsorshipBrochure(): jsPDF {
 
   // Set PDF document properties
   doc.setProperties({
-    title: 'CQTA Sponsorship Opportunities - Canadian Quality and Testing Association',
-    subject: 'CQTA Sponsorship Package Information and Benefits',
+    title,
+    subject: subtitle ? `${title} - ${subtitle}` : title,
     author: 'Canadian Quality and Testing Association (CQTA)',
     keywords: 'CQTA, Sponsorship, Quality Engineering, Software Testing, QA, Canada, Tech Events, Brand Exposure',
-    creator: 'CQTA - cqtacanada.com'
+    creator: 'CQTA - cqtacanada.com',
+    description: subtitle ? `${subtitle} ${intro}` : intro
   });
 
   // Helper function to check if we need a new page
@@ -93,96 +119,40 @@ export function generateSponsorshipBrochure(): jsPDF {
   // Main Title
   doc.setFontSize(18);
   doc.setFont("helvetica", "bold");
-  doc.text("Sponsorship Opportunities", pageWidth / 2, yPosition, { align: "center" });
-  yPosition += 12;
+
+  doc.text(title, pageWidth / 2, yPosition, { align: "center" });
+  yPosition += 9;
 
   // Introduction box
   doc.setFillColor(245, 245, 245); // Very light gray
-  const introHeight = 28;
-  doc.rect(margin, yPosition, contentWidth, introHeight, "F");
+  // Combine subtitle and intro for the intro block, but avoid duplication
+  let introBlock = intro;
+  if (subtitle && !intro.includes(subtitle)) {
+    introBlock = `${subtitle} ${intro}`;
+  }
+  // Make intro box narrower and font larger to reduce line count
+  const introBoxWidth = Math.min(contentWidth, 280); // ~320pt is about 4.4in, adjust as needed
+  const introBoxX = (pageWidth - introBoxWidth) / 2;
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
+  const introLines = doc.splitTextToSize(introBlock, introBoxWidth);
+  // Add vertical gap (padding) between box and text
+  const introPaddingY = 5;
+  const introHeight = introLines.length * 8 + introPaddingY * 2;
+  doc.rect(introBoxX, yPosition, introBoxWidth, introHeight, "F");
   doc.setTextColor(60, 60, 60); // Dark gray for better readability
-  const introLines = doc.splitTextToSize(
-    "Partner with CQTA to elevate your brand and contribute to the advancement of quality engineering in Canada. Our sponsorship packages provide exceptional opportunities for brand exposure, industry leadership, and engagement with Canada's premier quality engineering community.",
-    contentWidth - 10
-  );
-  let introY = yPosition + 7;
+  // Vertically center the text in the intro block
+  const totalTextHeight = introLines.length * 8;
+  let introY = yPosition + (introHeight - totalTextHeight) / 2;
   introLines.forEach((line: string) => {
     doc.text(line, pageWidth / 2, introY, { align: "center" });
-    introY += 5;
+    introY += 8;
   });
   doc.setTextColor(0, 0, 0);
   yPosition += introHeight + 12;
 
   // Sponsorship tiers data
-  const sponsorshipTiers: SponsorshipTier[] = [
-    {
-      level: "Executive",
-      price: "$7,000 CAD",
-      highlight: true,
-      features: [
-        "All Gold, Silver & Bronze benefits",
-        "Exclusive 30-minute speaker slot",
-        "Opportunity to demo product(s)",
-        "Sponsor CQTA Awards",
-        "Highest tier branding & recognition"
-      ],
-      description: "Includes all benefits of Gold, Silver and Bronze sponsors with exclusive premium features"
-    },
-    {
-      level: "Gold",
-      price: "$5,000 CAD",
-      popular: true,
-      features: [
-        "5 social media shoutouts (2 post-event)",
-        "Recognition twice during the event",
-        "Table booth at event venue",
-        "Post-event attendee contact list (opt-in)",
-        "6 complimentary event passes",
-        "5-minute speaking slot in keynote/panel",
-        "Branded swag in attendee kits"
-      ],
-      description: "Premium sponsorship with extensive brand exposure and engagement opportunities"
-    },
-    {
-      level: "Silver",
-      price: "$3,000 CAD",
-      features: [
-        "3 social media shoutouts (1 post-event)",
-        "Recognition once during the event",
-        "Table booth at event venue",
-        "4 complimentary event passes",
-        "Branded swag in attendee kits"
-      ],
-      description: "Ideal mid-tier sponsorship with excellent brand visibility"
-    },
-    {
-      level: "Bronze",
-      price: "$2,000 CAD",
-      features: [
-        "2 social media shoutouts (1 post-event)",
-        "Recognition once during the event",
-        "Sponsor logo displayed on event banner",
-        "2 complimentary event passes",
-        "Branded swag in attendee kits"
-      ],
-      description: "Entry-level sponsorship with solid brand exposure"
-    },
-    {
-      level: "After Hours",
-      price: "Contact us for more info",
-      contactButton: true,
-      features: [
-        "Exclusive after-hours networking session sponsorship",
-        "3 social media shoutouts (1 post-event)",
-        "Recognition during after-hours session",
-        "Table booth at the venue",
-        "Post-event attendee contact list (opt-in)"
-      ],
-      description: "Exclusive sponsorship opportunity for the after-hours networking experience"
-    }
-  ];
+  const sponsorshipTiers: SponsorshipTier[] = tiers;
 
   // Helper function to render a single tier card
   const renderTierCard = (tier: SponsorshipTier, xPos: number, yPos: number, cardWidth: number) => {
@@ -255,106 +225,99 @@ export function generateSponsorshipBrochure(): jsPDF {
   const columnGap = 8;
   const cardWidth = (contentWidth - columnGap) / 2;
   
-  renderTierCard(sponsorshipTiers[0], margin, yPosition, cardWidth); // Executive
-  renderTierCard(sponsorshipTiers[1], margin + cardWidth + columnGap, yPosition, cardWidth); // Gold
-  yPosition += 75;
 
-  // Row 2: Silver and Bronze
-  checkNewPage(80);
-  renderTierCard(sponsorshipTiers[2], margin, yPosition, cardWidth); // Silver
-  renderTierCard(sponsorshipTiers[3], margin + cardWidth + columnGap, yPosition, cardWidth); // Bronze
-  yPosition += 75;
+  // Render tiers: 2 per row, then last as full width if odd
+  let i = 0;
+  while (i < sponsorshipTiers.length) {
+    checkNewPage(80);
+    if (i + 1 < sponsorshipTiers.length - 1) {
+      renderTierCard(sponsorshipTiers[i], margin, yPosition, cardWidth);
+      renderTierCard(sponsorshipTiers[i + 1], margin + cardWidth + columnGap, yPosition, cardWidth);
+      yPosition += 75;
+      i += 2;
+    } else {
+      // Last card, full width
+      doc.setDrawColor(200, 200, 200);
+      doc.setLineWidth(0.5);
+      doc.setFillColor(249, 249, 249);
+      doc.roundedRect(margin, yPosition, contentWidth, 65, 3, 3, "FD");
+      const tier = sponsorshipTiers[i];
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${tier.level} Sponsor`, margin + 5, yPosition + 10);
+      // Price at bottom, $ in front, center-aligned and prominent
+      const priceY = yPosition + 65 - 8;
+      doc.setTextColor(204, 0, 0);
+      doc.setFontSize(22);
+      doc.setFont("helvetica", "bold");
+      doc.text(tier.price.startsWith('$') ? tier.price : `$ ${tier.price}`, pageWidth / 2, priceY, { align: "center" });
+      doc.setTextColor(0, 0, 0);
+      let tierY = yPosition + 18;
+      // Description
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "italic");
+      doc.setTextColor(80, 80, 80);
+      const descLines = doc.splitTextToSize(tier.description, contentWidth - 15);
+      descLines.forEach((line: string) => {
+        doc.text(line, margin + 5, tierY);
+        tierY += 4;
+      });
+      doc.setTextColor(0, 0, 0);
+      tierY += 2;
+      // Features
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      tier.features.forEach((feature) => {
+        doc.setTextColor(204, 0, 0);
+        doc.text("✓", margin + 7, tierY);
+        doc.setTextColor(0, 0, 0);
+        const featureLines = doc.splitTextToSize(feature, contentWidth - 20);
+        featureLines.forEach((line: string, index: number) => {
+          doc.text(line, margin + 12, tierY);
+          if (index < featureLines.length - 1) tierY += 4;
+        });
+        tierY += 5;
+      });
+      yPosition += 75;
+      i++;
+    }
+  }
 
-  // Row 3: After Hours (full width, special card)
-  checkNewPage(80);
-  doc.setDrawColor(200, 200, 200);
-  doc.setLineWidth(0.5);
-  doc.setFillColor(249, 249, 249);
-  doc.roundedRect(margin, yPosition, contentWidth, 65, 3, 3, "FD");
-  
-  // After Hours tier details
-  const afterHours = sponsorshipTiers[4];
-  doc.setTextColor(0, 0, 0);
-  doc.setFontSize(16);
-  doc.setFont("helvetica", "bold");
-  doc.text(`${afterHours.level} Sponsor`, margin + 5, yPosition + 10);
-  // Price at bottom, $ in front, center-aligned and prominent
-  const afterHoursPriceY = yPosition + 65 - 8;
-  doc.setTextColor(204, 0, 0);
-  doc.setFontSize(22);
-  doc.setFont("helvetica", "bold");
-  doc.text(afterHours.price.startsWith('$') ? afterHours.price : `$ ${afterHours.price}`, pageWidth / 2, afterHoursPriceY, { align: "center" });
-  doc.setTextColor(0, 0, 0);
-  
-  let afterHoursY = yPosition + 18;
 
-  // Description
-  doc.setFontSize(9);
-  doc.setFont("helvetica", "italic");
-  doc.setTextColor(80, 80, 80);
-  const ahDescLines = doc.splitTextToSize(afterHours.description, contentWidth - 15);
-  ahDescLines.forEach((line: string) => {
-    doc.text(line, margin + 5, afterHoursY);
-    afterHoursY += 4;
-  });
-  doc.setTextColor(0, 0, 0);
-  afterHoursY += 2;
-
-  // Features
-  doc.setFontSize(9);
-  doc.setFont("helvetica", "normal");
-  afterHours.features.forEach((feature) => {
-    doc.setTextColor(204, 0, 0);
-    doc.text("✓", margin + 7, afterHoursY);
-    doc.setTextColor(0, 0, 0);
-    const featureLines = doc.splitTextToSize(feature, contentWidth - 20);
-    featureLines.forEach((line: string, index: number) => {
-      doc.text(line, margin + 12, afterHoursY);
-      if (index < featureLines.length - 1) afterHoursY += 4;
-    });
-    afterHoursY += 5;
-  });
-
-  yPosition += 75;
-
-  // CTA Section - "Join CQTA as a Sponsor"
-  checkNewPage(50);
+  // CTA Section
+  checkNewPage(60);
   doc.setFillColor(204, 0, 0);
-  doc.roundedRect(margin, yPosition, contentWidth, 50, 5, 5, "F");
+  doc.roundedRect(margin, yPosition, contentWidth, 60, 5, 5, "F");
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(16);
   doc.setFont("helvetica", "bold");
-  doc.text("Join CQTA as a Sponsor", pageWidth / 2, yPosition + 11, { align: "center" });
-  
+  doc.text(ctaTitle, pageWidth / 2, yPosition + 11, { align: "center" });
   doc.setFontSize(11);
   doc.setFont("helvetica", "normal");
-  doc.text("Showcase your commitment to quality engineering and connect directly with", pageWidth / 2, yPosition + 20, { align: "center" });
-  doc.text("industry professionals through Canada's fast-growing hub for testing innovation.", pageWidth / 2, yPosition + 27, { align: "center" });
-  
+  // Wrap CTA text
+  const ctaLines = doc.splitTextToSize(ctaText, contentWidth - 20);
+  let ctaY = yPosition + 22;
+  ctaLines.forEach((line: string) => {
+    doc.text(line, pageWidth / 2, ctaY, { align: "center" });
+    ctaY += 5;
+  });
+  // Contact line
   doc.setFont("helvetica", "bold");
-  doc.text("Contact us today to discuss your sponsorship package!", pageWidth / 2, yPosition + 34, { align: "center" });
-  
-  // Add contact info on one line with hyperlinks
-  const contactY = yPosition + 42;
-  const contactLine = "Visit: cqtacanada.com  |  Email: cqtacanada@gmail.com";
+  doc.text(contactLine, pageWidth / 2, ctaY + 2, { align: "center" });
+  // Website and email
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(255, 255, 255);
-  doc.text(contactLine, pageWidth / 2, contactY, { align: "center" });
-
-  // Overlay links on the individual parts of the line
-  const leftX = pageWidth / 2 - doc.getTextWidth(contactLine) / 2;
-  const visitText = "cqtacanada.com";
-  const beforeVisit = "Visit: ";
-  const visitX = leftX + doc.getTextWidth(beforeVisit);
-  doc.textWithLink(visitText, visitX, contactY, { url: "https://cqtacanada.com" });
-
-  const emailText = "cqtacanada@gmail.com";
-  const beforeEmail = "Visit: cqtacanada.com  |  Email: ";
-  const emailX = leftX + doc.getTextWidth(beforeEmail);
-  doc.textWithLink(emailText, emailX, contactY, { url: "mailto:cqtacanada@gmail.com" });
-  
-  yPosition += 60;
+  const webEmailY = ctaY + 10;
+  const webEmailLine = `${website}  |  ${email}`;
+  doc.text(webEmailLine, pageWidth / 2, webEmailY, { align: "center" });
+  // Add clickable links
+  const leftX = pageWidth / 2 - doc.getTextWidth(webEmailLine) / 2;
+  doc.textWithLink(website, leftX, webEmailY, { url: `https://${website.replace(/^https?:\/\//, "")}` });
+  const emailX = leftX + doc.getTextWidth(`${website}  |  `);
+  doc.textWithLink(email, emailX, webEmailY, { url: `mailto:${email}` });
+  yPosition += 70;
   doc.setTextColor(0, 0, 0);
 
   // Footer
