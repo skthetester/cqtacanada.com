@@ -97,7 +97,7 @@ export default function Footer() {
               <h4 className="text-base font-semibold !text-white">Stay Connected with CQTA.</h4>
               <div className="flex gap-3">
                 <a
-                  href="https://linkedin.com"
+                  href="https://ca.linkedin.com/company/canadian-quality-and-testing-association"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-canada-red hover:bg-red-700 flex items-center justify-center transition-colors"
@@ -108,7 +108,7 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="mailto:info@cqtacanada.com"
+                  href="mailto:contact@cqtacanada.com"
                   className="w-10 h-10 rounded-full bg-canada-red hover:bg-red-700 flex items-center justify-center transition-colors"
                   aria-label="Email"
                 >

@@ -30,6 +30,7 @@
 - [x] Ensure Documentation is Complete
 	README.md and copilot-instructions.md exist
 
-- Work through each checklist item systematically.
-- Keep communication concise and focused.
-- Follow development best practices.
+
+# Contact Information
+- Email: contact@cqtacanada.com
+- LinkedIn: https://ca.linkedin.com/company/canadian-quality-and-testing-association

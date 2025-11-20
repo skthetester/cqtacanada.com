@@ -4,12 +4,12 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Hero
-        title="Canada's Hub for Testing Innovation"
-        subtitle="Empowering Excellence, Elevating Quality: The Canadian Quality and Testing Association"
+        title="Empowering Excellence, Elevating Quality: Canada's Hub for Testing Innovation"
+        subtitle=""
         image="/about-hero.jpg"
         overlay="red"
         ctaText="Join the Community"
-        ctaLink="https://www.linkedin.com/company/cqtacanada/"
+        ctaLink="https://ca.linkedin.com/company/canadian-quality-and-testing-association"
       />
       <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

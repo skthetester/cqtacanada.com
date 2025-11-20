@@ -108,7 +108,7 @@ export default function Home() {
           subtitle: 'Join the fastest-growing community of QE professionals shaping the future of testing.',
           overlay: 'red',
           ctaText: 'Join the community',
-          ctaLink: 'https://www.linkedin.com/company/cqtacanada/',
+          ctaLink: 'https://ca.linkedin.com/company/canadian-quality-and-testing-association',
         }]}
       />
 
