@@ -36,7 +36,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* Designed and developed by QA Career Labs Inc. */}
       <body className={`${inter.variable} ${poppins.variable} ${jetMono.variable} antialiased`}>
+        {/* Designed and developed by QA Career Labs Inc. */}
         <LanguageProvider>
           <Header />
           <main>{children}</main>

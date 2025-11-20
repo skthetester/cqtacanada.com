@@ -3,8 +3,10 @@ import { ReactNode } from 'react';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider>
-      <div style={{ minHeight: '100vh', background: '#181a20', display: 'flex', flexDirection: 'column' }}>
+    <>
+      {/* Designed and developed by QA Career Labs Inc. */}
+      <ClerkProvider>
+        <div style={{ minHeight: '100vh', background: '#181a20', display: 'flex', flexDirection: 'column' }}>
         <header style={{
           padding: '1rem 2rem',
           borderBottom: '1px solid #23242a',
@@ -51,6 +53,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </SignedOut>
         </main>
       </div>
-    </ClerkProvider>
+        </ClerkProvider>
+      {/* Designed and developed by QA Career Labs Inc. */}
+    </>
   );
 }
