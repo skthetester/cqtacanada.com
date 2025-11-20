@@ -1,3 +1,17 @@
+## Image Optimization
+
+To ensure fast loading, optimize images in the `public` folder using the provided script:
+
+1. Install dependencies (if not already):
+   ```bash
+   npm install sharp
+   ```
+2. Run the optimization script:
+   ```bash
+   node scripts/optimize-images.js
+   ```
+This will resize and compress all key images in the `public` directory. Re-run the script whenever you add or update images.
+
 # CQTA Website
 
 A modern, professional website for the Canadian Software Quality Testing Association (CQTA), built with Next.js and Tailwind CSS.
