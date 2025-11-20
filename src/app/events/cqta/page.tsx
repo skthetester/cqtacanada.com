@@ -1,4 +1,5 @@
 import Hero from "../../../components/Hero";
+import { motion } from "framer-motion";
 
 export default function CQTAEvents() {
   const upcomingEvents = [

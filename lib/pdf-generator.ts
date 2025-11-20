@@ -49,8 +49,7 @@ export function generateSponsorshipBrochure({
     subject: subtitle ? `${title} - ${subtitle}` : title,
     author: 'Canadian Quality and Testing Association (CQTA)',
     keywords: 'CQTA, Sponsorship, Quality Engineering, Software Testing, QA, Canada, Tech Events, Brand Exposure',
-    creator: 'CQTA - cqtacanada.com',
-    description: subtitle ? `${subtitle} ${intro}` : intro
+    creator: 'CQTA - cqtacanada.com'
   });
 
   // Helper function to check if we need a new page

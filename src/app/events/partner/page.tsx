@@ -1,4 +1,6 @@
+"use client";
 import Hero from "../../../components/Hero";
+import { motion } from "framer-motion";
 
 export default function PartnerEvents() {
   const upcomingEvents = [
@@ -83,6 +85,7 @@ export default function PartnerEvents() {
           </div>
         </motion.section>
       </div>
-    </div>
+    </motion.div>
+  </div>
   );
 }
