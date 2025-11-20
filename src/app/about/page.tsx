@@ -1,4 +1,6 @@
+"use client";
 import Hero from "../../components/Hero";
+import { motion } from "framer-motion";
 
 const TEAM = [
   {
@@ -66,7 +68,13 @@ export default function About() {
       />
 
       {/* What We Stand For */}
-      <section className="py-16 bg-white">
+      <motion.section
+        className="py-16 bg-white"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <div className="site-container max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-14" style={{ color: '#23242a' }}>What We Stand For</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -117,10 +125,16 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Team Behind the Scene */}
-      <section className="py-16 bg-gray-900 text-white">
+      <motion.section
+        className="py-16 bg-gray-900 text-white"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <div className="site-container max-w-6xl mx-auto">
           <h2 className="text-3xl font-extrabold mb-10 text-center" style={{ color: '#fff' }}>Team Behind the Scene</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
@@ -133,10 +147,16 @@ export default function About() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Pillars */}
-      <section className="py-24 bg-white">
+      <motion.section
+        className="py-24 bg-white"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <div className="site-container max-w-7xl mx-auto">
           <div className="flex flex-col items-center justify-center text-center">
             <h2 className="text-4xl font-bold mb-8" style={{ color: '#23242a' }}>Our Pillars</h2>
@@ -193,10 +213,16 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Call to Action */}
-      <section className="py-16">
+      <motion.section
+        className="py-16"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <div className="site-container">
           <div className="bg-gradient-to-r from-canada-red to-red-700 text-white rounded-lg shadow-xl p-12 text-center">
             <h2 className="text-3xl font-bold mb-4" style={{ color: '#fff', fontWeight: 700, marginBottom: '1rem' }}>Let's Start the Conversation</h2>
@@ -221,7 +247,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
