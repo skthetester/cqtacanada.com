@@ -196,18 +196,30 @@ export default function About() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-canada-red">
-        <div className="site-container max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Let's Start the Conversation</h2>
-          <p className="text-white text-lg mb-8">Ready to connect, collaborate, or build with us? Reach out and join the CQTA community today.</p>
-          <a
-            href="https://ca.linkedin.com/company/canadian-quality-and-testing-association"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="carousel-btn px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-colors inline-block"
-          >
-            Join the Community
-          </a>
+      <section className="py-16">
+        <div className="site-container">
+          <div className="bg-gradient-to-r from-canada-red to-red-700 text-white rounded-lg shadow-xl p-12 text-center">
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#fff', fontWeight: 700, marginBottom: '1rem' }}>Let's Start the Conversation</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Ready to connect, collaborate, or build with us? Reach out and join the CQTA community today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href="https://ca.linkedin.com/company/canadian-quality-and-testing-association"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-white text-canada-red px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              >
+                Join the Community
+              </a>
+              <a
+                href="/contact"
+                className="inline-block bg-gray-800 !text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-700 transition-colors shadow-lg"
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
